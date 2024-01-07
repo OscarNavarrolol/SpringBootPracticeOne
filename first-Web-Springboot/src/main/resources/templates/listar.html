@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" type="text/css" th:href="@{/stylesOne.css}" href="/stylesOne.css">
+
     <meta charset="UTF-8">
     <title>Listado de personas en BBDD</title>
 </head>
 <body>
-    <h1>Lista personas</h1>
-    <!-- Tabla para mostrar los datos de las personas -->
-    <table style="border-collapse: separate; border-spacing: 10px;">
-        <!-- Encabezados de la tabla -->
-        <tr>
-            <th>id</th>
-            <th>Nombre</th>
-            <th>Edad</th>
-            <th>Acciones</th>
-        </tr>
-    </table>
-    <!-- Tabla para mostrar los datos de las personas -->
-    <table style="border-collapse: separate; border-spacing: 10px;">
-        <!-- Bucle para iterar sobre la lista de personas -->
-        <tr th:each="persona : ${listpersonas}">
-            <!-- Celdas con datos de cada persona -->
-            <td th:text="${persona.idUser}"></td>
-            <td th:text="${persona.nameUser}"></td>
-            <td th:text="${persona.age}"></td>
-            <td>
-                <a>Edit</a>
-                <a>Delete</a>
-            </td>
-        </tr>
+<h1>Lista personas</h1>
+<!-- Tabla para mostrar los datos de las personas -->
+<table class="styled-table">
+    <!-- Encabezados de la tabla -->
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <!-- Cuerpo de la tabla -->
+    <tbody>
+    <!-- Bucle para iterar sobre la lista de personas -->
+    <tr th:each="persona : ${listpersonas}">
+        <!-- Celdas con datos de cada persona -->
+        <td th:text="${persona.idUser}"></td>
+        <td th:text="${persona.nameUser}"></td>
+        <td th:text="${persona.age}"></td>
+        <td>
+            <a th:href="@{/personas/editar/{idUser}(idUser=${persona.idUser})}">Edit</a>
+            <a th:href="@{/personas/eliminar/{idUser}(idUser=${persona.idUser})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!-- Enlace para agregar una nueva persona -->
 
-    </table>
-    <!-- Enlace para agregar una nueva persona -->
-    <a href="/personas/new"> nueva persona </a>
+<div class="enlace">
+    <a href="/personas/new">Nueva Persona</a>
+</div>
 </body>
 </html>
